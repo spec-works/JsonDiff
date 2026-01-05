@@ -1,0 +1,28 @@
+{
+  "linkset": [
+    {
+      "href": "https://datatracker.ietf.org/doc/html/rfc6902",
+      "type": "text/html",
+      "rel": "describedby",
+      "title": "JavaScript Object Notation (JSON) Patch"
+    },
+    {
+      "href": "https://jsonpatch.com/",
+      "type": "text/html",
+      "rel": "related",
+      "title": "JSON Patch - Reference and Test Suite"
+    },
+    {
+      "href": "https://www.iana.org/assignments/media-types/application/json-patch+json",
+      "type": "text/html",
+      "rel": "related",
+      "title": "IANA Media Type Registration for application/json-patch+json"
+    },
+    {
+      "href": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "type": "text/html",
+      "rel": "related",
+      "title": "RFC 6901 - JSON Pointer (used by JSON Patch for path notation)"
+    }
+  ]
+}

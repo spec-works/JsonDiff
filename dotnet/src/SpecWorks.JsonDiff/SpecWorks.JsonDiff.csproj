@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net10.0;net8.0</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <LangVersion>latest</LangVersion>
+
+    <!-- NuGet Package Properties -->
+    <PackageId>SpecWorks.JsonDiff</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>SpecWorks</Authors>
+    <Company>SpecWorks</Company>
+    <Product>SpecWorks.JsonDiff</Product>
+    <Description>RFC 6902 compliant JSON Patch diff generator. Creates JSON Patch documents by comparing two JSON objects. Strictly implements RFC 6902 with no proprietary formats or extensions. Part of the SpecWorks specification-based component collection.</Description>
+    <PackageTags>json;patch;diff;rfc6902;jsonpatch;specworks</PackageTags>
+    <PackageProjectUrl>https://github.com/yourusername/spec-works</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/yourusername/spec-works</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Initial release (v1.0) - Wrapper implementation using SystemTextJson.JsonDiffPatch library. Strictly RFC 6902 compliant.</PackageReleaseNotes>
+    <Copyright>Copyright (c) 2026 SpecWorks</Copyright>
+
+    <!-- Strong Naming -->
+    <AssemblyName>SpecWorks.JsonDiff</AssemblyName>
+    <RootNamespace>SpecWorks.JsonDiff</RootNamespace>
+
+    <!-- Source Link Support -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="9.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
+    <PackageReference Include="SystemTextJson.JsonDiffPatch" Version="2.0.0" />
+  </ItemGroup>
+
+</Project>
