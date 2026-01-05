@@ -197,9 +197,8 @@ public class JsonPatchErrorEdgeCaseTests
         Assert.NotNull(patch);
         Assert.NotEmpty(patch.Operations);
         
-        // Should add /a as a complete object
-        var addAOp = patch.Operations.FirstOrDefault(op => op.path == "/a");
-        Assert.NotNull(addAOp);
+        // Should add /a as a complete object (provides clearer error message than FirstOrDefault + NotNull)
+        Assert.Contains(patch.Operations, op => op.path == "/a");
     }
 
     /// <summary>
@@ -263,8 +262,8 @@ public class JsonPatchErrorEdgeCaseTests
         Assert.NotNull(patch);
         Assert.NotEmpty(patch.Operations);
         
-        // Should have an operation at root path
-        Assert.Contains(patch.Operations, op => op.path == "/" || op.path == "");
+        // Should have an operation at root path (generator uses "/" for root in RFC 6902)
+        Assert.Contains(patch.Operations, op => op.path == "/");
     }
 
     /// <summary>
@@ -284,8 +283,8 @@ public class JsonPatchErrorEdgeCaseTests
         Assert.NotNull(patch);
         Assert.NotEmpty(patch.Operations);
         
-        // Should have an operation at root path
-        Assert.Contains(patch.Operations, op => op.path == "/" || op.path == "");
+        // Should have an operation at root path (generator uses "/" for root in RFC 6902)
+        Assert.Contains(patch.Operations, op => op.path == "/");
     }
 
     #endregion
