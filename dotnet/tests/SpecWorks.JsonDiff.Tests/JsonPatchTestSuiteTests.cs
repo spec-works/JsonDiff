@@ -11,10 +11,27 @@ namespace SpecWorks.JsonDiff.Tests;
 /// Tests using the official JSON Patch test suite from https://github.com/json-patch/json-patch-tests
 /// </summary>
 /// <remarks>
+/// <para>
 /// This test suite validates that our diff generator produces correct RFC 6902 patches
 /// by comparing the generated patches against the official test suite's expected patches.
-/// Tests with "error" or "disabled" fields are filtered out as they test patch application,
-/// not diff generation.
+/// </para>
+/// <para>
+/// Tests with "error" or "disabled" fields are filtered out because they test patch *application*
+/// failures, not diff *generation*. The error test cases (36 total: 31 from tests.json, 5 from
+/// spec_tests.json) validate scenarios where applying a patch should fail, such as:
+/// - Malformed patch documents (missing required fields)
+/// - Invalid patch operations (out of bounds indices, nonexistent paths)
+/// - Test operation failures (value mismatches)
+/// </para>
+/// <para>
+/// Since JsonDiffGenerator creates patches rather than applies them, these error scenarios are
+/// not directly applicable. However, edge cases inspired by these error scenarios are tested in
+/// <see cref="JsonPatchErrorEdgeCaseTests"/>, which validates that the diff generator handles
+/// edge case documents gracefully and produces valid patches.
+/// </para>
+/// <para>
+/// For more details on the design decisions around error test cases, see ERROR_TEST_CASES.md.
+/// </para>
 /// </remarks>
 public class JsonPatchTestSuiteTests
 {
@@ -26,7 +43,7 @@ public class JsonPatchTestSuiteTests
         var specTests = LoadTestFile("spec_tests.json");
 
         return tests.Concat(specTests)
-            .Where(t => !t.Disabled && t.Error == null) // Filter out error and disabled tests
+            .Where(t => !t.Disabled && t.Error == null) // Filter out error and disabled tests (see class remarks)
             .Select(t => new object[] { t });
     }
 
