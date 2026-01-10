@@ -48,6 +48,7 @@ jsondiff <source-file> <target-file> [options]
 ### Options
 
 - `--pretty` - Format output with indentation
+- `--allow-comments` - Allow comments in JSON input files (JSONC format)
 - `--help` - Show help message
 
 ### Examples
@@ -70,6 +71,12 @@ Pipe output to a file:
 dotnet run -- old.json new.json --pretty > patch.json
 ```
 
+Compare JSON files with comments (JSONC):
+
+```bash
+dotnet run -- config-old.jsonc config-new.jsonc --allow-comments --pretty
+```
+
 ## Output
 
 The tool outputs a JSON Patch document (RFC 6902) to stdout. The patch represents the operations needed to transform the source JSON into the target JSON.
@@ -83,6 +90,28 @@ Example output:
   { "op": "add", "path": "/country", "value": "USA" }
 ]
 ```
+
+## JSONC Support
+
+The CLI supports JSON files with comments (JSONC format) when using the `--allow-comments` option. This is useful for configuration files and other JSON documents that include documentation comments.
+
+Supported comment styles:
+- Single-line comments: `// comment`
+- Multi-line comments: `/* comment */`
+
+Example JSONC file:
+
+```jsonc
+{
+  // User information
+  "name": "Alice",
+  "age": 30,  // Updated annually
+  /* Contact details */
+  "city": "Boston"
+}
+```
+
+**Note:** The `--allow-comments` option is opt-in to maintain strict RFC 6902 compliance by default. Regular JSON files work with or without this option.
 
 ## Exit Codes
 

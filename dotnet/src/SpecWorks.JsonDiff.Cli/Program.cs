@@ -21,8 +21,9 @@ class Program
             Console.WriteLine("  <target-file>  Path to the target JSON file");
             Console.WriteLine();
             Console.WriteLine("Options:");
-            Console.WriteLine("  --pretty       Format output with indentation");
-            Console.WriteLine("  --help         Show this help message");
+            Console.WriteLine("  --pretty          Format output with indentation");
+            Console.WriteLine("  --allow-comments  Allow comments in JSON input files (JSONC format)");
+            Console.WriteLine("  --help            Show this help message");
             Console.WriteLine();
             Console.WriteLine("Output:");
             Console.WriteLine("  The tool outputs a JSON Patch document (RFC 6902) to stdout.");
@@ -45,18 +46,21 @@ class Program
             Console.WriteLine("  <target-file>  Path to the target JSON file");
             Console.WriteLine();
             Console.WriteLine("Options:");
-            Console.WriteLine("  --pretty       Format output with indentation");
-            Console.WriteLine("  --help         Show this help message");
+            Console.WriteLine("  --pretty          Format output with indentation");
+            Console.WriteLine("  --allow-comments  Allow comments in JSON input files (JSONC format)");
+            Console.WriteLine("  --help            Show this help message");
             Console.WriteLine();
             Console.WriteLine("Examples:");
             Console.WriteLine("  jsondiff old.json new.json");
             Console.WriteLine("  jsondiff source.json target.json --pretty");
+            Console.WriteLine("  jsondiff config-with-comments.jsonc config-new.jsonc --allow-comments");
             return 1;
         }
 
         string sourceFile = args[0];
         string targetFile = args[1];
         bool pretty = args.Contains("--pretty");
+        bool allowComments = args.Contains("--allow-comments");
 
         try
         {
@@ -77,10 +81,18 @@ class Program
             JsonNode? source;
             JsonNode? target;
 
+            // Configure JSON parsing options
+            var parseOptions = new JsonDocumentOptions
+            {
+                CommentHandling = allowComments 
+                    ? JsonCommentHandling.Skip 
+                    : JsonCommentHandling.Disallow
+            };
+
             try
             {
                 string sourceContent = await File.ReadAllTextAsync(sourceFile);
-                source = JsonNode.Parse(sourceContent);
+                source = JsonNode.Parse(sourceContent, documentOptions: parseOptions);
 
                 if (source == null)
                 {
@@ -97,7 +109,7 @@ class Program
             try
             {
                 string targetContent = await File.ReadAllTextAsync(targetFile);
-                target = JsonNode.Parse(targetContent);
+                target = JsonNode.Parse(targetContent, documentOptions: parseOptions);
 
                 if (target == null)
                 {
