@@ -115,10 +115,35 @@ class Program
             var generator = new JsonDiffGenerator();
             var patch = generator.CreateDiff(source, target);
 
-            // Convert patch to JSON
-            string patchJson = JsonSerializer.Serialize(patch.Operations, new JsonSerializerOptions
+            // Convert operations to RFC 6902 compliant format
+            var rfc6902Operations = patch.Operations.Select(op =>
             {
-                WriteIndented = pretty
+                var operation = new Dictionary<string, object?>
+                {
+                    ["op"] = op.op,
+                    ["path"] = op.path
+                };
+
+                // Add value for operations that require it
+                if (op.op == "add" || op.op == "replace" || op.op == "test")
+                {
+                    operation["value"] = op.value;
+                }
+
+                // Add from for operations that require it
+                if ((op.op == "move" || op.op == "copy") && !string.IsNullOrEmpty(op.from))
+                {
+                    operation["from"] = op.from;
+                }
+
+                return operation;
+            }).ToList();
+
+            // Convert patch to JSON
+            string patchJson = JsonSerializer.Serialize(rfc6902Operations, new JsonSerializerOptions
+            {
+                WriteIndented = pretty,
+                DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
             });
 
             // Output result
