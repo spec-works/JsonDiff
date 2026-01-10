@@ -115,11 +115,8 @@ class Program
             var generator = new JsonDiffGenerator();
             var patch = generator.CreateDiff(source, target);
 
-            // Convert patch to JSON
-            string patchJson = JsonSerializer.Serialize(patch.Operations, new JsonSerializerOptions
-            {
-                WriteIndented = pretty
-            });
+            // Convert patch to RFC 6902 compliant JSON
+            string patchJson = Rfc6902Serializer.Serialize(patch, writeIndented: pretty);
 
             // Output result
             Console.WriteLine(patchJson);
