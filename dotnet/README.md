@@ -51,6 +51,35 @@ patch.ApplyTo(source);
 - **Well Tested** - Comprehensive test suite including RFC examples
 - **.NET 10.0 and .NET Standard 2.1** - Supports modern and legacy frameworks
 
+## Serialization
+
+When you need to serialize a patch to JSON (e.g., for API responses), use the `Rfc6902Serializer` to ensure RFC 6902 compliance:
+
+```csharp
+using SpecWorks.JsonDiff;
+using System.Text.Json.Nodes;
+
+var source = JsonNode.Parse("{\"name\":\"Alice\",\"age\":30}");
+var target = JsonNode.Parse("{\"name\":\"Alice\",\"age\":31}");
+
+var generator = new JsonDiffGenerator();
+var patch = generator.CreateDiff(source, target);
+
+// Serialize to RFC 6902 compliant JSON
+string json = Rfc6902Serializer.Serialize(patch, writeIndented: true);
+
+// Output:
+// [
+//   {
+//     "op": "replace",
+//     "path": "/age",
+//     "value": 31
+//   }
+// ]
+```
+
+The `Rfc6902Serializer` ensures that only RFC 6902 specified fields are included in the output, excluding internal fields like `OperationType` that are not part of the specification.
+
 ## Usage Examples
 
 ### Basic Usage
@@ -221,6 +250,33 @@ public class JsonDiffGenerator : IJsonDiffGenerator
 ```
 
 Default implementation of `IJsonDiffGenerator`.
+
+### Rfc6902Serializer Class
+
+```csharp
+public static class Rfc6902Serializer
+{
+    public static string Serialize(JsonPatchDocument patch, bool writeIndented = false);
+}
+```
+
+**Serialize Method**
+
+Serializes a JsonPatchDocument to an RFC 6902 compliant JSON string.
+
+- **Parameters:**
+  - `patch` - The patch document to serialize (JsonPatchDocument)
+  - `writeIndented` - Whether to format the output with indentation (default: false)
+- **Returns:** RFC 6902 compliant JSON string
+- **Throws:** `ArgumentNullException` if patch is null
+
+**Why use Rfc6902Serializer?**
+
+The `JsonPatchDocument.Operations` collection contains `Microsoft.AspNetCore.JsonPatch.Operations.Operation` objects which have internal properties like `OperationType` that are not part of RFC 6902. Using `Rfc6902Serializer.Serialize()` ensures:
+
+- Only RFC 6902 specified fields are included
+- No internal implementation details leak into output
+- Full specification compliance for interoperability
 
 ## Testing
 
