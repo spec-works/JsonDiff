@@ -1,4 +1,6 @@
 # JsonDiff
+[![Registry](https://img.shields.io/badge/Registry-SpecWorks-blue)](https://spec-works.github.io/registry/parts/jsondiff/)
+
 
 Software component for generating JSON Patch (RFC 6902) documents by comparing two JSON objects.
 
