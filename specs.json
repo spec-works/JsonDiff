@@ -23,6 +23,11 @@
       "type": "text/html",
       "rel": "related",
       "title": "RFC 6901 - JSON Pointer (used by JSON Patch for path notation)"
+    },
+    {
+      "rel": "registry",
+      "title": "Part registry entry",
+      "href": "https://spec-works.github.io/registry/parts/jsondiff/"
     }
   ]
 }
