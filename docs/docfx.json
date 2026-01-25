@@ -3,7 +3,9 @@
     {
       "src": [
         {
-          "files": ["SpecWorks.JsonDiff/SpecWorks.JsonDiff.csproj"],
+          "files": [
+            "SpecWorks.JsonDiff/SpecWorks.JsonDiff.csproj"
+          ],
           "src": "../dotnet/src"
         }
       ],
@@ -17,20 +19,41 @@
   "build": {
     "content": [
       {
-        "files": ["api/**.yml", "api/index.md"]
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
       },
       {
-        "files": ["**.md", "**.yml"],
-        "exclude": ["obj/**", "_site/**", "**/bin/**", "**/obj/**"]
+        "files": [
+          "**.md",
+          "**.yml"
+        ],
+        "exclude": [
+          "obj/**",
+          "_site/**",
+          "**/bin/**",
+          "**/obj/**"
+        ]
       }
     ],
     "resource": [
       {
-        "files": ["images/**"]
+        "files": [
+          "images/**"
+        ]
+      },
+      {
+        "files": [
+          "styles/**"
+        ]
       }
     ],
     "output": "_site",
-    "template": ["default", "modern"],
+    "template": [
+      "default",
+      "modern"
+    ],
     "globalMetadata": {
       "_appTitle": "JsonDiff Documentation",
       "_appName": "JsonDiff",
@@ -40,7 +63,12 @@
       "_gitContribute": {
         "repo": "https://github.com/spec-works/JsonDiff",
         "branch": "main"
-      }
+      },
+      "_appLogoPath": "images/logo.svg",
+      "_appFaviconPath": "images/logo.svg",
+      "_extraCss": [
+        "styles/main.css"
+      ]
     }
   }
 }
