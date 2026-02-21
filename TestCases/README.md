@@ -16,6 +16,31 @@ Comprehensive test suite with 72+ test cases covering:
 ### `spec_tests.json`
 Test cases derived directly from RFC 6902 specification examples (17 tests).
 
+### `diff_tests.json`
+Test cases specifically for **diff generation** (28 tests) — given `doc` and `expected`,
+verify the generated patch transforms `doc` into `expected`:
+- No changes / identical documents
+- Single add, remove, replace operations
+- Multiple mixed operations
+- Type transitions (string↔number, object↔array, value↔null)
+- Deep nested changes (add, remove, replace at depth)
+- Array growth, shrinking, and element replacement
+- Empty ↔ populated objects and arrays
+- Root-level document replacement and type changes
+- Real-world scenarios (contact updates, config changes)
+
+### `edge_cases.json`
+Edge case test cases for **diff generation** (24 tests):
+- JSON Pointer escaping (`~0`, `~1` for tilde and slash in property names)
+- Special property names (empty string, scientific notation, leading zeros, spaces, quotes)
+- Unicode property names
+- Very deep nesting (6+ levels)
+- Arrays of objects, mixed-type arrays, nested arrays
+- Large numbers and floating point values
+- Boolean transitions
+- Null ↔ value/object/array transitions
+- All JSON value types changed simultaneously
+
 ## Test Format
 
 Each test file is a JSON array containing test records with the following structure:

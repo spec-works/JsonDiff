@@ -25,6 +25,18 @@
       "title": "RFC 6901 - JSON Pointer (used by JSON Patch for path notation)"
     },
     {
+      "href": "https://github.com/spec-works/JsonDiff/tree/main/TestCases",
+      "rel": "https://specworks.org/rels/tests",
+      "type": "text/html",
+      "title": "Shared test cases"
+    },
+    {
+      "href": "https://github.com/spec-works/JsonDiff/actions",
+      "rel": "https://specworks.org/rels/tests",
+      "type": "text/html",
+      "title": "CI Test Results"
+    },
+    {
       "rel": "registry",
       "title": "Part registry entry",
       "href": "https://spec-works.github.io/registry/parts/jsondiff/"

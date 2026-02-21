@@ -1,0 +1,115 @@
+[
+    { "comment": "Property name with forward slash (JSON Pointer escape ~1)",
+      "doc": {"a/b": 1},
+      "expected": {"a/b": 2} },
+
+    { "comment": "Property name with tilde (JSON Pointer escape ~0)",
+      "doc": {"a~b": 1},
+      "expected": {"a~b": 2} },
+
+    { "comment": "Property name with both tilde and slash",
+      "doc": {"a~1b": "old"},
+      "expected": {"a~1b": "new"} },
+
+    { "comment": "Property name that looks like scientific notation",
+      "doc": {"1e0": "foo"},
+      "expected": {"1e0": "bar"} },
+
+    { "comment": "Property name with leading zeros",
+      "doc": {"00": "foo"},
+      "expected": {"00": "bar"} },
+
+    { "comment": "Property name is empty string",
+      "doc": {"": "foo"},
+      "expected": {"": "bar"} },
+
+    { "comment": "Property name with special characters",
+      "doc": {"a b": 1, "c\"d": 2, "e\\f": 3},
+      "expected": {"a b": 10, "c\"d": 20, "e\\f": 30} },
+
+    { "comment": "Unicode property names",
+      "doc": {"日本語": "old", "émoji": "🎉"},
+      "expected": {"日本語": "new", "émoji": "🎊"} },
+
+    { "comment": "Very deeply nested change",
+      "doc": {"a": {"b": {"c": {"d": {"e": {"f": 1}}}}}},
+      "expected": {"a": {"b": {"c": {"d": {"e": {"f": 2}}}}}} },
+
+    { "comment": "Array of objects - modify one",
+      "doc": {"items": [{"id": 1, "name": "a"}, {"id": 2, "name": "b"}]},
+      "expected": {"items": [{"id": 1, "name": "a"}, {"id": 2, "name": "B"}]} },
+
+    { "comment": "Array of mixed types",
+      "doc": {"arr": [1, "two", true, null, {"five": 5}]},
+      "expected": {"arr": [1, "TWO", false, null, {"five": 50}]} },
+
+    { "comment": "Nested arrays",
+      "doc": {"matrix": [[1, 2], [3, 4]]},
+      "expected": {"matrix": [[1, 2], [3, 99]]} },
+
+    { "comment": "Large number values",
+      "doc": {"big": 9999999999999999},
+      "expected": {"big": 1} },
+
+    { "comment": "Floating point values",
+      "doc": {"pi": 3.14159},
+      "expected": {"pi": 3.14160} },
+
+    { "comment": "Boolean transitions",
+      "doc": {"a": true, "b": false},
+      "expected": {"a": false, "b": true} },
+
+    { "comment": "Null to object",
+      "doc": {"data": null},
+      "expected": {"data": {"key": "value"}} },
+
+    { "comment": "Object to null",
+      "doc": {"data": {"key": "value"}},
+      "expected": {"data": null} },
+
+    { "comment": "Array to null",
+      "doc": {"data": [1, 2, 3]},
+      "expected": {"data": null} },
+
+    { "comment": "Null to array",
+      "doc": {"data": null},
+      "expected": {"data": [1, 2, 3]} },
+
+    { "comment": "All JSON value types",
+      "doc": {
+        "string": "hello",
+        "number": 42,
+        "float": 3.14,
+        "boolTrue": true,
+        "boolFalse": false,
+        "nullVal": null,
+        "array": [1, 2],
+        "object": {"a": 1}
+      },
+      "expected": {
+        "string": "world",
+        "number": 99,
+        "float": 2.72,
+        "boolTrue": false,
+        "boolFalse": true,
+        "nullVal": "not null",
+        "array": [3, 4],
+        "object": {"b": 2}
+      } },
+
+    { "comment": "Sibling properties: one added, one removed, one changed",
+      "doc": {"keep": 1, "remove": 2, "change": 3},
+      "expected": {"keep": 1, "change": 30, "add": 4} },
+
+    { "comment": "Array with only additions",
+      "doc": {"arr": []},
+      "expected": {"arr": ["a", "b", "c"]} },
+
+    { "comment": "Array with only removals",
+      "doc": {"arr": ["a", "b", "c"]},
+      "expected": {"arr": []} },
+
+    { "comment": "Array element type change",
+      "doc": {"arr": [1, "two", 3]},
+      "expected": {"arr": ["one", 2, "three"]} }
+]

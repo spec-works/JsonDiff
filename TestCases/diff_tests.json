@@ -1,0 +1,159 @@
+[
+    { "comment": "No changes between identical objects",
+      "doc": {"foo": "bar", "baz": 42},
+      "expected": {"foo": "bar", "baz": 42},
+      "expectedPatchOps": [] },
+
+    { "comment": "Add single property",
+      "doc": {"foo": "bar"},
+      "expected": {"foo": "bar", "baz": "qux"},
+      "expectedPatchOps": ["add"] },
+
+    { "comment": "Remove single property",
+      "doc": {"foo": "bar", "baz": "qux"},
+      "expected": {"foo": "bar"},
+      "expectedPatchOps": ["remove"] },
+
+    { "comment": "Replace single value",
+      "doc": {"foo": "bar"},
+      "expected": {"foo": "baz"},
+      "expectedPatchOps": ["replace"] },
+
+    { "comment": "Multiple operations: add, remove, replace",
+      "doc": {"a": 1, "b": 2, "c": 3},
+      "expected": {"a": 10, "c": 3, "d": 4},
+      "expectedPatchOps": ["replace", "remove", "add"] },
+
+    { "comment": "Replace value type: string to number",
+      "doc": {"foo": "42"},
+      "expected": {"foo": 42} },
+
+    { "comment": "Replace value type: number to boolean",
+      "doc": {"foo": 1},
+      "expected": {"foo": true} },
+
+    { "comment": "Replace value type: object to array",
+      "doc": {"foo": {"bar": 1}},
+      "expected": {"foo": [1, 2, 3]} },
+
+    { "comment": "Replace value type: array to object",
+      "doc": {"foo": [1, 2, 3]},
+      "expected": {"foo": {"bar": 1}} },
+
+    { "comment": "Replace value type: value to null",
+      "doc": {"foo": "bar"},
+      "expected": {"foo": null} },
+
+    { "comment": "Replace value type: null to value",
+      "doc": {"foo": null},
+      "expected": {"foo": "bar"} },
+
+    { "comment": "Nested object change",
+      "doc": {"a": {"b": {"c": 1}}},
+      "expected": {"a": {"b": {"c": 2}}} },
+
+    { "comment": "Deep nested add",
+      "doc": {"a": {"b": {"c": 1}}},
+      "expected": {"a": {"b": {"c": 1, "d": 2}}} },
+
+    { "comment": "Deep nested remove",
+      "doc": {"a": {"b": {"c": 1, "d": 2}}},
+      "expected": {"a": {"b": {"c": 1}}} },
+
+    { "comment": "Array element added at end",
+      "doc": {"arr": [1, 2]},
+      "expected": {"arr": [1, 2, 3]} },
+
+    { "comment": "Array element removed from middle",
+      "doc": {"arr": [1, 2, 3]},
+      "expected": {"arr": [1, 3]} },
+
+    { "comment": "Array element replaced",
+      "doc": {"arr": [1, 2, 3]},
+      "expected": {"arr": [1, 99, 3]} },
+
+    { "comment": "Array grows significantly",
+      "doc": {"arr": [1, 2]},
+      "expected": {"arr": [1, 2, 3, 4, 5, 6, 7, 8, 9]} },
+
+    { "comment": "Array shrinks significantly",
+      "doc": {"arr": [1, 2, 3, 4, 5, 6, 7, 8, 9]},
+      "expected": {"arr": [1, 2]} },
+
+    { "comment": "Empty object to populated object",
+      "doc": {},
+      "expected": {"foo": "bar", "baz": [1, 2]} },
+
+    { "comment": "Populated object to empty object",
+      "doc": {"foo": "bar", "baz": [1, 2]},
+      "expected": {} },
+
+    { "comment": "Empty array to populated array",
+      "doc": {"arr": []},
+      "expected": {"arr": [1, 2, 3]} },
+
+    { "comment": "Populated array to empty array",
+      "doc": {"arr": [1, 2, 3]},
+      "expected": {"arr": []} },
+
+    { "comment": "Real-world: contact info update",
+      "doc": {
+        "name": "John Doe",
+        "email": "john@old.com",
+        "phone": "555-0100",
+        "address": {
+          "street": "123 Main St",
+          "city": "Springfield",
+          "state": "IL"
+        }
+      },
+      "expected": {
+        "name": "John Doe",
+        "email": "john@new.com",
+        "phone": "555-0100",
+        "address": {
+          "street": "456 Oak Ave",
+          "city": "Springfield",
+          "state": "IL",
+          "zip": "62701"
+        },
+        "website": "https://johndoe.com"
+      } },
+
+    { "comment": "Real-world: config file update",
+      "doc": {
+        "version": "1.0",
+        "database": {
+          "host": "localhost",
+          "port": 3306,
+          "name": "mydb"
+        },
+        "features": ["auth", "logging"]
+      },
+      "expected": {
+        "version": "2.0",
+        "database": {
+          "host": "db.example.com",
+          "port": 5432,
+          "name": "mydb",
+          "ssl": true
+        },
+        "features": ["auth", "logging", "caching"],
+        "redis": {
+          "host": "redis.example.com",
+          "port": 6379
+        }
+      } },
+
+    { "comment": "Replace root document",
+      "doc": {"foo": "bar"},
+      "expected": {"baz": "qux"} },
+
+    { "comment": "Replace root: array to object",
+      "doc": [1, 2, 3],
+      "expected": {"foo": "bar"} },
+
+    { "comment": "Replace root: object to array",
+      "doc": {"foo": "bar"},
+      "expected": [1, 2, 3] }
+]
