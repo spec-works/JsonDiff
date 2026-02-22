@@ -26,6 +26,8 @@
     <!-- Strong Naming -->
     <AssemblyName>SpecWorks.JsonDiff</AssemblyName>
     <RootNamespace>SpecWorks.JsonDiff</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>SpecWorks.JsonDiff.snk</AssemblyOriginatorKeyFile>
 
     <!-- Source Link Support -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
