@@ -163,6 +163,15 @@ jsondiff old.json new.json -o changes.patch
 - .NET 10.0 or .NET 8.0 (LTS)
 - C# 10.0 or later
 
+## Test Cases
+
+All implementations are validated against shared, language-independent test cases in the [TestCases/](https://github.com/spec-works/JsonDiff/tree/main/TestCases) directory:
+
+- **tests.json** — 72+ patch application tests from the [json-patch-tests](https://github.com/json-patch/json-patch-tests) suite
+- **spec_tests.json** — 17 tests derived from RFC 6902 specification examples
+- **diff_tests.json** — 28 diff generation tests covering type transitions, real-world scenarios, and root replacements
+- **edge_cases.json** — 24 edge case tests for JSON Pointer escaping, unicode, deep nesting, and mixed types
+
 ## Source Code
 
 View the source code on [GitHub](https://github.com/spec-works/JsonDiff).
