@@ -1,0 +1,107 @@
+{
+  "source_base_path": "/home/runner/work/JsonDiff/JsonDiff/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SpecWorks.JsonDiff.IJsonDiffGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SpecWorks.JsonDiff.IJsonDiffGenerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SpecWorks.JsonDiff.IJsonDiffGenerator",
+      "Summary": "<p sourcefile=\"api/SpecWorks.JsonDiff.IJsonDiffGenerator.yml\" sourcestartlinenumber=\"1\">Generates RFC 6902 compliant JSON Patch documents by comparing two JSON documents.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SpecWorks.JsonDiff.JsonDiffGenerator.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SpecWorks.JsonDiff.JsonDiffGenerator.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SpecWorks.JsonDiff.JsonDiffGenerator",
+      "Summary": "<p sourcefile=\"api/SpecWorks.JsonDiff.JsonDiffGenerator.yml\" sourcestartlinenumber=\"1\">Default implementation of <xref href=\"SpecWorks.JsonDiff.IJsonDiffGenerator\" data-throw-if-not-resolved=\"false\"></xref> that generates\nRFC 6902 compliant JSON Patch documents.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/SpecWorks.JsonDiff.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/SpecWorks.JsonDiff.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "SpecWorks.JsonDiff",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

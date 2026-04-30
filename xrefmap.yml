@@ -1,0 +1,66 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: SpecWorks.JsonDiff
+  name: SpecWorks.JsonDiff
+  href: api/SpecWorks.JsonDiff.html
+  commentId: N:SpecWorks.JsonDiff
+  fullName: SpecWorks.JsonDiff
+  nameWithType: SpecWorks.JsonDiff
+- uid: SpecWorks.JsonDiff.IJsonDiffGenerator
+  name: IJsonDiffGenerator
+  href: api/SpecWorks.JsonDiff.IJsonDiffGenerator.html
+  commentId: T:SpecWorks.JsonDiff.IJsonDiffGenerator
+  fullName: SpecWorks.JsonDiff.IJsonDiffGenerator
+  nameWithType: IJsonDiffGenerator
+- uid: SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode)
+  name: CreateDiff(JsonNode, JsonNode)
+  href: api/SpecWorks.JsonDiff.IJsonDiffGenerator.html#SpecWorks_JsonDiff_IJsonDiffGenerator_CreateDiff_System_Text_Json_Nodes_JsonNode_System_Text_Json_Nodes_JsonNode_
+  commentId: M:SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode)
+  fullName: SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode, System.Text.Json.Nodes.JsonNode)
+  nameWithType: IJsonDiffGenerator.CreateDiff(JsonNode, JsonNode)
+- uid: SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff*
+  name: CreateDiff
+  href: api/SpecWorks.JsonDiff.IJsonDiffGenerator.html#SpecWorks_JsonDiff_IJsonDiffGenerator_CreateDiff_
+  commentId: Overload:SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff
+  isSpec: "True"
+  fullName: SpecWorks.JsonDiff.IJsonDiffGenerator.CreateDiff
+  nameWithType: IJsonDiffGenerator.CreateDiff
+- uid: SpecWorks.JsonDiff.JsonDiffGenerator
+  name: JsonDiffGenerator
+  href: api/SpecWorks.JsonDiff.JsonDiffGenerator.html
+  commentId: T:SpecWorks.JsonDiff.JsonDiffGenerator
+  fullName: SpecWorks.JsonDiff.JsonDiffGenerator
+  nameWithType: JsonDiffGenerator
+- uid: SpecWorks.JsonDiff.JsonDiffGenerator.#ctor
+  name: JsonDiffGenerator()
+  href: api/SpecWorks.JsonDiff.JsonDiffGenerator.html#SpecWorks_JsonDiff_JsonDiffGenerator__ctor
+  commentId: M:SpecWorks.JsonDiff.JsonDiffGenerator.#ctor
+  name.vb: New()
+  fullName: SpecWorks.JsonDiff.JsonDiffGenerator.JsonDiffGenerator()
+  fullName.vb: SpecWorks.JsonDiff.JsonDiffGenerator.New()
+  nameWithType: JsonDiffGenerator.JsonDiffGenerator()
+  nameWithType.vb: JsonDiffGenerator.New()
+- uid: SpecWorks.JsonDiff.JsonDiffGenerator.#ctor*
+  name: JsonDiffGenerator
+  href: api/SpecWorks.JsonDiff.JsonDiffGenerator.html#SpecWorks_JsonDiff_JsonDiffGenerator__ctor_
+  commentId: Overload:SpecWorks.JsonDiff.JsonDiffGenerator.#ctor
+  isSpec: "True"
+  name.vb: New
+  fullName: SpecWorks.JsonDiff.JsonDiffGenerator.JsonDiffGenerator
+  fullName.vb: SpecWorks.JsonDiff.JsonDiffGenerator.New
+  nameWithType: JsonDiffGenerator.JsonDiffGenerator
+  nameWithType.vb: JsonDiffGenerator.New
+- uid: SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode)
+  name: CreateDiff(JsonNode, JsonNode)
+  href: api/SpecWorks.JsonDiff.JsonDiffGenerator.html#SpecWorks_JsonDiff_JsonDiffGenerator_CreateDiff_System_Text_Json_Nodes_JsonNode_System_Text_Json_Nodes_JsonNode_
+  commentId: M:SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode,System.Text.Json.Nodes.JsonNode)
+  fullName: SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff(System.Text.Json.Nodes.JsonNode, System.Text.Json.Nodes.JsonNode)
+  nameWithType: JsonDiffGenerator.CreateDiff(JsonNode, JsonNode)
+- uid: SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff*
+  name: CreateDiff
+  href: api/SpecWorks.JsonDiff.JsonDiffGenerator.html#SpecWorks_JsonDiff_JsonDiffGenerator_CreateDiff_
+  commentId: Overload:SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff
+  isSpec: "True"
+  fullName: SpecWorks.JsonDiff.JsonDiffGenerator.CreateDiff
+  nameWithType: JsonDiffGenerator.CreateDiff

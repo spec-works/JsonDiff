@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>SpecWorks.JsonDiff (.NET) | JsonDiff Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="SpecWorks.JsonDiff (.NET) | JsonDiff Documentation ">
+      
+      
+      <link rel="icon" href="images/logo.svg">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/spec-works/JsonDiff/blob/main/docs/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="JsonDiff">
+            JsonDiff
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="specworksjsondiff-net">SpecWorks.JsonDiff (.NET)</h1>
+
+<p>RFC 6902 compliant JSON Patch diff generator for .NET.</p>
+<h2 id="overview">Overview</h2>
+<p>SpecWorks.JsonDiff is a .NET library that generates JSON Patch (RFC 6902) documents by comparing two JSON objects. It provides a simple, standards-focused API that strictly implements RFC 6902 without supporting proprietary formats or extensions.</p>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-bash">dotnet add package SpecWorks.JsonDiff
+</code></pre>
+<p>Or via NuGet Package Manager:</p>
+<pre><code>Install-Package SpecWorks.JsonDiff
+</code></pre>
+<h2 id="quick-start">Quick Start</h2>
+<pre><code class="lang-csharp">using SpecWorks.JsonDiff;
+using System.Text.Json.Nodes;
+
+// Parse JSON documents
+var source = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:30}&quot;);
+var target = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:31,\&quot;city\&quot;:\&quot;NYC\&quot;}&quot;);
+
+// Generate RFC 6902 patch
+var generator = new JsonDiffGenerator();
+var patch = generator.CreateDiff(source, target);
+
+// Result:
+// [
+//   { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/age&quot;, &quot;value&quot;: 31 },
+//   { &quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/city&quot;, &quot;value&quot;: &quot;NYC&quot; }
+// ]
+
+// Apply the patch using Microsoft.AspNetCore.JsonPatch
+patch.ApplyTo(source);
+// source now equals target
+</code></pre>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>RFC 6902 Compliant</strong> - Strictly implements JSON Patch standard</li>
+<li><strong>Simple API</strong> - Single method: <code>CreateDiff(source, target)</code></li>
+<li><strong>Type Safe</strong> - Uses <code>System.Text.Json.Nodes.JsonNode</code> and <code>Microsoft.AspNetCore.JsonPatch.JsonPatchDocument</code></li>
+<li><strong>No Configuration</strong> - No format options, always RFC 6902</li>
+<li><strong>Well Tested</strong> - Comprehensive test suite including RFC examples</li>
+<li><strong>.NET 10.0 and .NET Standard 2.1</strong> - Supports modern and legacy frameworks</li>
+</ul>
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre><code class="lang-csharp">using SpecWorks.JsonDiff;
+using System.Text.Json.Nodes;
+
+var generator = new JsonDiffGenerator();
+
+// Add property
+var source1 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;}&quot;);
+var target1 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:30}&quot;);
+var patch1 = generator.CreateDiff(source1, target1);
+// Result: [{ &quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/age&quot;, &quot;value&quot;: 30 }]
+
+// Remove property
+var source2 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:30}&quot;);
+var target2 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;}&quot;);
+var patch2 = generator.CreateDiff(source2, target2);
+// Result: [{ &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;/age&quot; }]
+
+// Replace property
+var source3 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:30}&quot;);
+var target3 = JsonNode.Parse(&quot;{\&quot;name\&quot;:\&quot;Alice\&quot;,\&quot;age\&quot;:31}&quot;);
+var patch3 = generator.CreateDiff(source3, target3);
+// Result: [{ &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/age&quot;, &quot;value&quot;: 31 }]
+</code></pre>
+<h3 id="nested-objects">Nested Objects</h3>
+<pre><code class="lang-csharp">var source = JsonNode.Parse(@&quot;{
+    &quot;&quot;person&quot;&quot;: {
+        &quot;&quot;name&quot;&quot;: &quot;&quot;Alice&quot;&quot;,
+        &quot;&quot;age&quot;&quot;: 30
+    }
+}&quot;);
+
+var target = JsonNode.Parse(@&quot;{
+    &quot;&quot;person&quot;&quot;: {
+        &quot;&quot;name&quot;&quot;: &quot;&quot;Alice&quot;&quot;,
+        &quot;&quot;age&quot;&quot;: 31
+    }
+}&quot;);
+
+var patch = generator.CreateDiff(source, target);
+// Result: [{ &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/person/age&quot;, &quot;value&quot;: 31 }]
+</code></pre>
+<h3 id="complex-updates">Complex Updates</h3>
+<pre><code class="lang-csharp">var source = JsonNode.Parse(@&quot;{
+    &quot;&quot;name&quot;&quot;: &quot;&quot;Alice&quot;&quot;,
+    &quot;&quot;age&quot;&quot;: 30,
+    &quot;&quot;city&quot;&quot;: &quot;&quot;Boston&quot;&quot;,
+    &quot;&quot;active&quot;&quot;: true
+}&quot;);
+
+var target = JsonNode.Parse(@&quot;{
+    &quot;&quot;name&quot;&quot;: &quot;&quot;Alice&quot;&quot;,
+    &quot;&quot;age&quot;&quot;: 31,
+    &quot;&quot;country&quot;&quot;: &quot;&quot;USA&quot;&quot;,
+    &quot;&quot;active&quot;&quot;: false
+}&quot;);
+
+var patch = generator.CreateDiff(source, target);
+// Result: Multiple operations (replace age, remove city, add country, replace active)
+</code></pre>
+<h3 id="dependency-injection">Dependency Injection</h3>
+<pre><code class="lang-csharp">// Startup.cs or Program.cs
+services.AddSingleton&lt;IJsonDiffGenerator, JsonDiffGenerator&gt;();
+
+// Usage in a class
+public class MyService
+{
+    private readonly IJsonDiffGenerator _diffGenerator;
+
+    public MyService(IJsonDiffGenerator diffGenerator)
+    {
+        _diffGenerator = diffGenerator;
+    }
+
+    public void CompareDocuments(JsonNode source, JsonNode target)
+    {
+        var patch = _diffGenerator.CreateDiff(source, target);
+        // Use patch...
+    }
+}
+</code></pre>
+<h2 id="rfc-6902-operations">RFC 6902 Operations</h2>
+<p>JSON Patch supports six operation types:</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add</code></td>
+<td>Add a value to an object or array</td>
+<td><code>{&quot;op&quot;:&quot;add&quot;,&quot;path&quot;:&quot;/name&quot;,&quot;value&quot;:&quot;Alice&quot;}</code></td>
+</tr>
+<tr>
+<td><code>remove</code></td>
+<td>Remove a value</td>
+<td><code>{&quot;op&quot;:&quot;remove&quot;,&quot;path&quot;:&quot;/name&quot;}</code></td>
+</tr>
+<tr>
+<td><code>replace</code></td>
+<td>Replace a value</td>
+<td><code>{&quot;op&quot;:&quot;replace&quot;,&quot;path&quot;:&quot;/age&quot;,&quot;value&quot;:31}</code></td>
+</tr>
+<tr>
+<td><code>move</code></td>
+<td>Move a value</td>
+<td><code>{&quot;op&quot;:&quot;move&quot;,&quot;from&quot;:&quot;/old&quot;,&quot;path&quot;:&quot;/new&quot;}</code></td>
+</tr>
+<tr>
+<td><code>copy</code></td>
+<td>Copy a value</td>
+<td><code>{&quot;op&quot;:&quot;copy&quot;,&quot;from&quot;:&quot;/orig&quot;,&quot;path&quot;:&quot;/copy&quot;}</code></td>
+</tr>
+<tr>
+<td><code>test</code></td>
+<td>Test that a value equals specified</td>
+<td><code>{&quot;op&quot;:&quot;test&quot;,&quot;path&quot;:&quot;/name&quot;,&quot;value&quot;:&quot;Alice&quot;}</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-this-library-does-not-support">What This Library Does NOT Support</h2>
+<p>In accordance with the SpecWorks design philosophy, this library intentionally does <strong>NOT</strong> support:</p>
+<ul>
+<li>❌ <strong>RFC 7386 (JSON Merge Patch)</strong> - Different specification</li>
+<li>❌ <strong>Proprietary diff formats</strong> - Vendor-specific formats</li>
+<li>❌ <strong>Non-standard extensions</strong> - Custom operations</li>
+<li>❌ <strong>Format configuration options</strong> - RFC 6902 only, always</li>
+</ul>
+<p>This constraint ensures:</p>
+<ul>
+<li><strong>Interoperability</strong> - Works with any RFC 6902 compliant system</li>
+<li><strong>Standards compliance</strong> - Predictable, specification-based behavior</li>
+<li><strong>Simplicity</strong> - No configuration needed</li>
+<li><strong>Future-proof</strong> - Easy migration to native implementation (v2.x)</li>
+</ul>
+<h2 id="implementation-notes">Implementation Notes</h2>
+<h3 id="version-1x-current">Version 1.x (Current)</h3>
+<p>The current implementation uses a <strong>wrapper architecture</strong> with <code>SystemTextJson.JsonDiffPatch</code> as the underlying library. This approach:</p>
+<ul>
+<li>✅ Provides immediate RFC 6902 functionality</li>
+<li>✅ Uses battle-tested external library</li>
+<li>✅ Hides implementation details behind stable interface</li>
+<li>✅ Enables future migration without breaking changes</li>
+</ul>
+<h3 id="version-2x-future">Version 2.x (Future)</h3>
+<p>Future versions will replace the external dependency with a <strong>native SpecWorks-generated RFC 6902 implementation</strong>. The public API (<code>IJsonDiffGenerator</code>) will remain unchanged, ensuring seamless migration for all consumers.</p>
+<h2 id="api-reference">API Reference</h2>
+<h3 id="ijsondiffgenerator-interface">IJsonDiffGenerator Interface</h3>
+<pre><code class="lang-csharp">public interface IJsonDiffGenerator
+{
+    JsonPatchDocument CreateDiff(JsonNode source, JsonNode target);
+}
+</code></pre>
+<p><strong>CreateDiff Method</strong></p>
+<p>Generates an RFC 6902 JSON Patch document representing the differences between source and target.</p>
+<ul>
+<li><strong>Parameters:</strong>
+<ul>
+<li><code>source</code> - The source JSON document (JsonNode)</li>
+<li><code>target</code> - The target JSON document (JsonNode)</li>
+</ul>
+</li>
+<li><strong>Returns:</strong> <code>JsonPatchDocument</code> containing RFC 6902 operations</li>
+<li><strong>Throws:</strong> <code>ArgumentNullException</code> if source or target is null</li>
+</ul>
+<h3 id="jsondiffgenerator-class">JsonDiffGenerator Class</h3>
+<pre><code class="lang-csharp">public class JsonDiffGenerator : IJsonDiffGenerator
+{
+    public JsonDiffGenerator();
+    public JsonPatchDocument CreateDiff(JsonNode source, JsonNode target);
+}
+</code></pre>
+<p>Default implementation of <code>IJsonDiffGenerator</code>.</p>
+<h2 id="testing">Testing</h2>
+<p>The library includes comprehensive tests covering:</p>
+<ul>
+<li>✅ All RFC 6902 operation types</li>
+<li>✅ RFC examples from specification</li>
+<li>✅ All JSON data types (string, number, boolean, null, array, object)</li>
+<li>✅ Edge cases (empty objects, deep nesting)</li>
+<li>✅ Complex real-world scenarios</li>
+<li>✅ Null argument validation</li>
+</ul>
+<p>Run tests:</p>
+<pre><code class="lang-bash">cd tests/SpecWorks.JsonDiff.Tests
+dotnet test
+</code></pre>
+<h2 id="building-from-source">Building from Source</h2>
+<pre><code class="lang-bash"># Clone the repository
+git clone https://github.com/yourusername/spec-works.git
+cd spec-works/JsonDiff/dotnet
+
+# Build
+dotnet build
+
+# Run tests
+dotnet test
+
+# Pack NuGet package
+dotnet pack src/SpecWorks.JsonDiff/SpecWorks.JsonDiff.csproj
+</code></pre>
+<h2 id="project-structure">Project Structure</h2>
+<pre><code>dotnet/
+├── src/
+│   └── SpecWorks.JsonDiff/
+│       ├── IJsonDiffGenerator.cs        # Public interface
+│       ├── JsonDiffGenerator.cs         # Public implementation
+│       ├── Adapters/
+│       │   └── SystemTextJsonAdapter.cs # Internal adapter (v1.x)
+│       └── SpecWorks.JsonDiff.csproj
+├── tests/
+│   └── SpecWorks.JsonDiff.Tests/
+│       ├── JsonDiffGeneratorTests.cs
+│       └── SpecWorks.JsonDiff.Tests.csproj
+└── README.md
+</code></pre>
+<h2 id="dependencies">Dependencies</h2>
+<ul>
+<li><strong>System.Text.Json</strong> - Included in .NET</li>
+<li><strong>Microsoft.AspNetCore.JsonPatch</strong> - For JsonPatchDocument type</li>
+<li><strong>SystemTextJson.JsonDiffPatch</strong> - Internal implementation (v1.x only)</li>
+</ul>
+<h2 id="compatibility">Compatibility</h2>
+<ul>
+<li><strong>.NET 10.0</strong> - Full support</li>
+<li><strong>.NET Standard 2.1</strong> - Full support for legacy projects</li>
+</ul>
+<h2 id="performance-considerations">Performance Considerations</h2>
+<p>The library is designed for correctness and standards compliance. For most use cases, performance is excellent. If you're diffing very large documents (&gt;1MB), consider:</p>
+<ul>
+<li>Streaming comparisons (custom implementation)</li>
+<li>Chunking large documents</li>
+<li>Caching diff results</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions are welcome! Please:</p>
+<ol>
+<li>Review the <a href="../adr/">Architecture Decision Records</a></li>
+<li>Follow RFC 6902 strictly</li>
+<li>Add tests for new functionality</li>
+<li>Maintain backward compatibility</li>
+</ol>
+<h2 id="license">License</h2>
+<p>MIT License - See LICENSE file for details.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6902">RFC 6902 - JavaScript Object Notation (JSON) Patch</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6901">RFC 6901 - JSON Pointer</a></li>
+<li><a href="https://jsonpatch.com/">JSON Patch Website</a></li>
+<li><a href="../../VISION.md">SpecWorks Vision</a></li>
+<li><a href="../adr/">Architecture Decision Records</a></li>
+</ul>
+<h2 id="related-projects">Related Projects</h2>
+<p>This JSON Patch generator is part of the <a href="../../">SpecWorks</a> collection of specification-based software components.</p>
+<h2 id="api-reference">API Reference</h2>
+<ul>
+<li><a href="api/SpecWorks.JsonDiff.html">API Documentation</a> - Complete API reference</li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/spec-works/JsonDiff/blob/main/docs/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <a href='https://spec-works.github.io/'>SpecWorks Factory</a> | <a href='https://github.com/spec-works/JsonDiff'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
